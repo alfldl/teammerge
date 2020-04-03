@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.body {
+	margin-top: 100px;
+}
+.container {
+	display: grid;
+	width: 80%;
+	grid-template-columns: 300px 1000px;
+	padding: 10px;
+	border: 1px solid;
+	margin-top: 100px;
+}
+
+.catego {
+	border: 1px solid;
+	padding: 20px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.item {
+	width: 1000px;
+	border: 1px solid;
+	padding: 20px;
+	font-size: 30px;
+	text-align: center;
+	float: left;	
+	font-size: 15px;
+}

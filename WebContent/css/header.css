@@ -1,0 +1,183 @@
+#wrap {
+	height: 100vh;
+	width: 80%;
+	margin: auto;
+} 
+
+
+#gongback1 {
+	height: 50px;
+}
+#gongback2 {
+	height: 15px;
+}
+
+
+section#main #gallery_box {
+	width: 1450px;
+	height: 204px;
+	margin-left: auto;
+	margin-right: auto;
+	border: solid 1px #cccccc;
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px #dddddd;
+	
+}
+
+section #gallery_list {
+	padding: 25px 0 0 18px;
+}
+
+section .items {
+	float: left;
+	text-align: center;
+	margin-left: 35px;
+}
+
+section .items li {
+	margin-top: 3px;
+	list-style:none;
+}
+
+.dropdown {
+  position: relative;
+	float: right;
+  right:20px;
+  
+
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  text-align:left;
+  
+  
+ 
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  display: block;
+	text-align:left; 
+	text-decoration: none;	
+}
+
+.dropdown-content a:hover {background-color: skyblue;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: lightgray;
+}
+#topnav{
+overflow: hidden;
+background-color: #333;
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index: -1;
+
+
+}
+#topnav a{
+float: left;
+display:block; 
+color:#f2f2f2;
+text-align: center;
+padding:14px 30px;
+text-decoration: none;
+
+}
+
+#topnav a:hover{
+background-color: #ddd;
+color:white;
+
+}
+
+
+.sticky{
+postition:fixed;
+top:0;
+width:100%;
+
+}
+.sticky+.content{
+padding-top:60px;
+
+}
+#con1 {
+	width: 100%;
+	height: 50px;
+	position:fixed;
+}
+
+
+
+.button{
+position:relative;
+border: none;
+border-radius: 5px;
+background-color:#ddd;
+width:50px;
+height:50px;
+bottom:8px;	
+left:4px;
+}
+.button img{
+	position:relative;
+	right:5.8px;
+}
+
+.login-container {
+float: right;
+position:relative;
+left:-65px;
+}
+.topnav input[type=text]{
+padding: 6px;
+margin-top: 8px;
+font-size: 17px;
+border: none;
+width:120px;
+background-color: #ddd;
+
+}
+.topnav input[type=password]{
+padding: 6px;
+margin-top: 8px;
+font-size: 17px;
+border: none;
+width:120px;
+background-color: #ddd;
+
+}
+.topnav .login-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-left: 10px;
+  margin-right: 16px;
+  background-color: white;
+  color: black;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+.login-success {
+	padding: 6px;
+	margin-top: 8px;
+	font-size: 17px;
+	border: none;
+	width:120px;
+	background-color: #ddd;
+	border-radius: 3px;
+}
