@@ -38,13 +38,14 @@ text-decoration: none;
 		   
 		   </c:choose>     
 		</a>
-	
+		<c:if test="${mNo ne null }">
 			<button onclick="location.href='boardUpdateForm.do?bNo=${board.bNo}&pageNum=${pageNum}'">
 			           수정
 			 </button>           
 			<button onclick="location.href='boardDeletePro.do?bNo=${board.bNo}&pageNum=${pageNum}'">
 			            삭제
 		</button>
+		</c:if>	
 		
 	</section>
 		
@@ -56,9 +57,11 @@ text-decoration: none;
 			<input type="hidden" name="bNo" value="${bNo }">
 			<input type="hidden" name="pageNum" value="${pageNum }">
 			<textarea style="resize: none; width: 800px; height: 90px;" name="content"></textarea>
+		<c:if test="${mNo ne null }">
 			<button>
 				등록
 			</button>
+		</c:if>			
 		</form>
 	</div>
 		<button onclick="location.href='boardList.do?pageNum=${pageNum }'">
