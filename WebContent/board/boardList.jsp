@@ -36,8 +36,13 @@ table {
   
 }
 
+.gongback {
+	height: 100px;
+}
+
 </style>
 
+<div class=gongback></div>
 <div id="wrap">
 	<h2 >자유게시판</h2>
 <hr>

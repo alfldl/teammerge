@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.sound.midi.Soundbank;
 import javax.sql.DataSource;
 
 public class MemberDao {
@@ -211,7 +212,10 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				dbPw = rs.getString("m_pw");
+				System.out.println("dbPw: " + dbPw);
+				System.out.println("m: " + m_pw);
 				if (dbPw.equals(m_pw)) {
+					System.out.println(22222);
 					result = 1;
 				} else {
 					result = 0;

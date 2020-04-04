@@ -31,13 +31,11 @@ public class LoginProAction implements CommandProcess {
 				session.setAttribute("m_id", m_id);
 				session.setAttribute("user", user);
 				return "index.jsp";
-			} else {
-				return "member/loginForm.jsp";
 			}
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return null;
+		return "member/loginForm.jsp";
 	}
 
 }

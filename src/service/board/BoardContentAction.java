@@ -31,20 +31,22 @@ public class BoardContentAction implements CommandProcess {
 			
 			HttpSession session = request.getSession();
 			LoginUser user = (LoginUser) session.getAttribute("user");
-			int mNo= user.getM_no();
 			
-			System.out.println("mNo----->" + mNo);
-			
-			
-			LikeDao likeDao = LikeDao.getInstance();
-			int isLike = likeDao.count(bNo, mNo);
+			if (user != null) {
+				int mNo= user.getM_no();
+				System.out.println("mNo----->" + mNo);
+				request.setAttribute("mNo", mNo);
+				
+				LikeDao likeDao = LikeDao.getInstance();
+				int isLike = likeDao.count(bNo, mNo);
+				
+				request.setAttribute("isLike", isLike);
+			}
 			
 			ReplyDao replyDao = ReplyDao.getInstance();
 			List<Reply> replyList = replyDao.select(bNo);
 			
-			request.setAttribute("mNo", mNo);
 			request.setAttribute("replyList", replyList);
-			request.setAttribute("isLike", isLike);
 			request.setAttribute("bNo", bNo);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("board", board);

@@ -6,15 +6,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Board Update</title>
 <%@ include file="../header.jsp" %>
-<div id=gongback1></div>
-<div id=gongback1></div>
+<style>
+.gongback {
+	height: 100px;
+}
+</style>
+
 <script>
 var error = "${param.error}"
 if (error == "true") {
 	alert("요청이 잘못되었습니다.")
 }
 </script>
-<div id="board">
+
+<div class="gongback"></div>
+<div id="wrap">
 	<form action="boardUpdatePro.do" method="post">
 		<input type="hidden" name="bNo" value="${bNo }">
 		<input type="hidden" name="pageNum" value="${pageNum }">

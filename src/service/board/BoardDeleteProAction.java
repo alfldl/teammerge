@@ -5,10 +5,12 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.board.BoardDao;
 import dao.board.LikeDao;
 import dao.board.ReplyDao;
+import dao.member.LoginUser;
 import service.CommandProcess;
 
 public class BoardDeleteProAction implements CommandProcess {
@@ -18,9 +20,11 @@ public class BoardDeleteProAction implements CommandProcess {
 			throws ServletException, IOException {
 		
 		int bNo = Integer.parseInt(request.getParameter("bNo"));
-		int mNo = Integer.parseInt(request.getParameter("mNo"));
 		String pageNum = request.getParameter("pageNum");
+		HttpSession session = request.getSession();
+		LoginUser user = (LoginUser)session.getAttribute("user");
 		int result = 0;
+		
 		try {
 			
 			BoardDao boardDao = BoardDao.getInstance();

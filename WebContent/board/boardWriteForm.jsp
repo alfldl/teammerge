@@ -5,16 +5,21 @@
 <title>Board</title>
 
 <%@ include file="../header.jsp" %>
+<style>
+.gongback {
+	height: 100px;
+}
+</style>
 
-<div id=gongback1></div>
-<div id=gongback1></div>
 <script>
 var error = "${param.error}"
 if (error == "true") {
 	alert("요청이 잘못되었습니다.")
 }
 </script>
-<div id="board">
+
+<div class=gongback></div>
+<div id="wrap">
 	<form action="boardWritePro.do?pageNum=${pageNum }" method="post">
 		<input type="hidden" name="bNo" value="${bNo }">
 
