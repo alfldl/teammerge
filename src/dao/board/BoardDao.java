@@ -194,7 +194,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO board VALUES( " 
 				+ "b_no.nextval, ?, ?, ?, "
-				+ "0, 0, sysdate, 0)";
+				+ "0, 0, sysdate, 0, 'nomal')";
 		
 		try {
 			conn = getConnection();
