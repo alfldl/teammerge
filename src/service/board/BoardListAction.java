@@ -21,16 +21,20 @@ public class BoardListAction implements CommandProcess {
 			throws ServletException, IOException {
 		
 		BoardDao boardDao = BoardDao.getInstance();
+		String pageNum = request.getParameter("pageNum");
+		String keyword = request.getParameter("keyword");
+		
+		if (keyword == null) keyword = "";
+		
 		try {
+			int totalCnt  = boardDao.getTotalCnt(keyword);
 			
-			int totalCnt  = boardDao.getTotalCnt();			
-			String pageNum = request.getParameter("pageNum");	
 			if (pageNum==null || pageNum.equals("")) {	
 				pageNum = "1";	
 			} 
 			
 			int currentPage = Integer.parseInt(pageNum); 
-			int pageSize  = 5, blockSize = 5; 
+			int pageSize  = 10, blockSize = 5; 
 			int startRow = (currentPage - 1) * pageSize + 1;  
 			int endRow   = startRow + pageSize - 1;          
 			int startNum = totalCnt - startRow + 1; 
@@ -39,10 +43,12 @@ public class BoardListAction implements CommandProcess {
 			int endPage = startPage + blockSize -1;	   
 			if (endPage > pageCnt) endPage = pageCnt;
 			
-			List<Board> list = boardDao.list(startRow, endRow);	
+			List<Board> list = boardDao.list(keyword, startRow, endRow);	
 			
 			HttpSession session = request.getSession();
 			LoginUser user = (LoginUser)session.getAttribute("user");
+			
+			
 			
 			request.setAttribute("user", user);
 			request.setAttribute("totalCnt", totalCnt);
@@ -54,6 +60,7 @@ public class BoardListAction implements CommandProcess {
 			request.setAttribute("pageCnt", pageCnt);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
+			request.setAttribute("keyword", keyword);
 	 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

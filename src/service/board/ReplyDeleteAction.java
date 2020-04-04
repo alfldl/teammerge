@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.board.BoardDao;
 import dao.board.ReplyDao;
 import dao.member.LoginUser;
 import service.CommandProcess;
@@ -27,10 +28,13 @@ public class ReplyDeleteAction implements CommandProcess {
 		
 		System.out.println("mNo------->" + mNo);
 		
+		
 		ReplyDao replyDao = ReplyDao.getInstance();
 		int result = 0;
 		
 		try {
+			BoardDao boardDao = BoardDao.getInstance();
+			boardDao.decreaseReply(bNo);
 			result = replyDao.delete(brNo);
 			
 		} catch (SQLException e) {

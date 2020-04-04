@@ -7,6 +7,8 @@ import java.util.Date;
 import javax.naming.*;
 import javax.sql.DataSource;
 
+import com.mysql.jdbc.StringUtils;
+
 
 public class BoardDao {
 	
@@ -33,35 +35,49 @@ public class BoardDao {
 		return conn;
 	}
 
-	public int getTotalCnt() throws SQLException {
+	public int getTotalCnt(String keyword) throws SQLException {
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int totalCnt =0;
 		String sql = "select count(*) from board";
+		String whereSql = "";
+		if (!StringUtils.isEmptyOrWhitespaceOnly(keyword)) {
+			whereSql = " WHERE b_title like '%' || ? || '%'"
+					+ " OR b_content like '%' || ? || '%'";
+		}
 		
 		try {
 			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql + whereSql);
+			if(!StringUtils.isEmptyOrWhitespaceOnly(keyword)) {
+				pstmt.setString(1, keyword);
+				pstmt.setString(2, keyword);
+			}
+			rs = pstmt.executeQuery();
 			if (rs.next()) totalCnt= rs.getInt(1);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (rs != null) rs.close();
-			if (stmt != null) stmt.close();
+			if (pstmt != null) pstmt.close();
 			if (conn !=null) conn.close();
 		}
 		return totalCnt;
 	}
 
-	public List<Board> list(int startRow, int endRow) throws SQLException {
+	public List<Board> list(String keyword, int startRow, int endRow) throws SQLException {
 		
 		List<Board> list = new ArrayList<Board>();
 		Connection conn = null;	
 		PreparedStatement pstmt= null;
 		ResultSet rs = null;
+		
+		String whereSql = "";
+		if (keyword != null && !keyword.equals("")) {
+			whereSql = "WHERE b_title like '%' || ? || '%' OR b_content like '%' || ? || '%'";
+		}
 		
 		 String sql =
 				 
@@ -70,19 +86,28 @@ public class BoardDao {
 					 + "FROM "
 					 + "( "
 					 +	 "SELECT "
-					 + 		"b.b_no, b.m_no, b.b_title, b.like_cnt, b.b_date, b.b_hits, m.m_name "
+					 + 		"b.b_no, b.m_no, b.b_title, b.re_cnt, b.like_cnt, b.b_date, b.b_hits, m.m_name "
 					 + 	 "FROM board b "
 					 + 	 "LEFT JOIN member m "
 					 +   "ON b.m_no = m.m_no "
+					 + whereSql
 					 +   "ORDER BY b_no DESC) a "
 				 + ") "+
 				 "WHERE rnum BETWEEN ? AND ?";
-		 
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			if (keyword != null && !keyword.equals("")) {
+				pstmt.setString(1, keyword);
+				pstmt.setString(2, keyword);
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+				
+			} else {
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Board board = new Board();
@@ -93,6 +118,7 @@ public class BoardDao {
 				board.setbDate(rs.getDate("b_date"));
 				board.setHits(rs.getInt("b_hits"));
 				board.setLikeCnt(rs.getInt("like_cnt"));
+				board.setReCnt(rs.getInt("re_cnt"));
 				
 				list.add(board);
 			}	
@@ -111,7 +137,7 @@ public class BoardDao {
 		Statement stmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT " 
-				+ "b.b_no, b.m_no, b.b_title, b_content, b.like_cnt, b.b_date, b.b_hits, m.m_name " 
+				+ "b.b_no, b.m_no, b.b_title, b.re_cnt, b_content, b.like_cnt, b.b_date, b.b_hits, m.m_name " 
 				+ "FROM board b " 
 				+ "LEFT JOIN member m " 
 				+ "ON b.m_no = m.m_no " 
@@ -132,6 +158,7 @@ public class BoardDao {
 				board.setLikeCnt(rs.getInt("like_cnt"));
 				board.setbDate(rs.getDate("b_date"));
 				board.setHits(rs.getInt("b_hits"));
+				board.setReCnt(rs.getInt("re_cnt"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -263,6 +290,42 @@ public class BoardDao {
 			if (conn != null) conn.close();
 			if (stmt != null) stmt.close();
 		}
+	}
+
+	public void increaseReply(int bNo) throws SQLException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE board set re_cnt = re_cnt+1 WHERE b_no=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bNo);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) conn.close();
+			if (pstmt != null) pstmt.close();
+		}
+	}
+
+	public void decreaseReply(int bNo) throws SQLException {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE board set re_cnt = re_cnt-1 WHERE b_no=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bNo);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) conn.close();
+			if (pstmt != null) pstmt.close();
+		}
+		
+		
 	}	
 }
 

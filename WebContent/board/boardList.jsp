@@ -4,14 +4,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<title>BoardList</title>
 
+<title>BoardList</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <%@ include file="../header.jsp" %>
+
+ 
 <script>
 var isDelete = "${param.delete}"
 if (isDelete == "true") {
 	alert("삭제완료!");
 } 
+
+function submit() {
+		var formTag = document.getElementById("icon");
+		formTag.submit();
+	}
+	
 </script>
 
 <style type="text/css"> 
@@ -45,6 +54,12 @@ table {
 <div class=gongback></div>
 <div id="wrap">
 	<h2 >자유게시판</h2>
+		<form action="boardList.do" id="icon">
+			<div style=text-align:right;>
+				<input type="text" name="keyword" required="required" placeholder="검색"> 
+				<i class="fa fa-search" onclick="submit();"></i>
+			</div>
+		</form>
 <hr>
 
 	<table>
@@ -57,7 +72,7 @@ table {
 					<tr style="text-align: center">
 						<td>${ board.bNo}</td>
 						<td><a href='boardContent.do?bNo=${board.bNo}&pageNum=${currentPage}'>
-							${ board.title}</a></td>
+							${ board.title}</a> &nbsp;[ ${ board.reCnt } ]</td>
 						<td>${ board.writer}</td>
 						<td>${ board.bDate}</td>
 						<td>${ board.hits}</td>
@@ -74,14 +89,15 @@ table {
 	
 		
 	<div style="text-align: center;">
+	
 		<c:if test="${startPage > blockSize }">
-			<a href='boardList.do?pageNum=${startPage-blockSize}'>[이전]</a>
+			<a href='boardList.do?pageNum=${startPage-blockSize}&keyword=${keyword}'>[이전]</a>
 		</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}">
-			<a href='boardList.do?pageNum=${i}'>[${i}]</a>
+			<a href='boardList.do?pageNum=${i}&keyword=${keyword}'>[${i}]</a>
 		</c:forEach>
 		<c:if test="${endPage < pageCnt }">
-			<a href='boardList.do?pageNum=${startPage+blockSize}'>[다음]</a>
+			<a href='boardList.do?pageNum=${startPage+blockSize}&keyword=${keyword}'>[다음]</a>
 		</c:if>
 	</div>
 	
