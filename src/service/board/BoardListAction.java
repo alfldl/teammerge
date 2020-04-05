@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.jdbc.StringUtils;
+
 import dao.board.Board;
 import dao.board.BoardDao;
 import dao.member.LoginUser;
@@ -23,7 +25,10 @@ public class BoardListAction implements CommandProcess {
 		BoardDao boardDao = BoardDao.getInstance();
 		String pageNum = request.getParameter("pageNum");
 		String keyword = request.getParameter("keyword");
-		
+		String filter = request.getParameter("filter");
+		if (StringUtils.isEmptyOrWhitespaceOnly(filter)) {
+			filter = "b_no";
+		}
 		if (keyword == null) keyword = "";
 		
 		try {
@@ -34,7 +39,7 @@ public class BoardListAction implements CommandProcess {
 			} 
 			
 			int currentPage = Integer.parseInt(pageNum); 
-			int pageSize  = 10, blockSize = 5; 
+			int pageSize  = 10, blockSize = 3; 
 			int startRow = (currentPage - 1) * pageSize + 1;  
 			int endRow   = startRow + pageSize - 1;          
 			int startNum = totalCnt - startRow + 1; 
@@ -43,12 +48,15 @@ public class BoardListAction implements CommandProcess {
 			int endPage = startPage + blockSize -1;	   
 			if (endPage > pageCnt) endPage = pageCnt;
 			
-			List<Board> list = boardDao.list(keyword, startRow, endRow);	
+			List<Board> list = boardDao.list(keyword, startRow, endRow, filter);
+			
+			if (pageNum.equals("1")) {
+				List<Board> noticeList = boardDao.noticeList();
+				request.setAttribute("noticeList", noticeList);
+			}
 			
 			HttpSession session = request.getSession();
 			LoginUser user = (LoginUser)session.getAttribute("user");
-			
-			
 			
 			request.setAttribute("user", user);
 			request.setAttribute("totalCnt", totalCnt);
@@ -61,6 +69,7 @@ public class BoardListAction implements CommandProcess {
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("keyword", keyword);
+			request.setAttribute("filter", filter);
 	 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

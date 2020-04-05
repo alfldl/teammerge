@@ -67,7 +67,7 @@ public class BoardDao {
 		return totalCnt;
 	}
 
-	public List<Board> list(String keyword, int startRow, int endRow) throws SQLException {
+	public List<Board> list(String keyword, int startRow, int endRow, String filter) throws SQLException {
 		
 		List<Board> list = new ArrayList<Board>();
 		Connection conn = null;	
@@ -76,7 +76,7 @@ public class BoardDao {
 		
 		String whereSql = "";
 		if (keyword != null && !keyword.equals("")) {
-			whereSql = "WHERE b_title like '%' || ? || '%' OR b_content like '%' || ? || '%'";
+			whereSql = "AND b_title like '%' || ? || '%' OR b_content like '%' || ? || '%'";
 		}
 		
 		 String sql =
@@ -90,10 +90,12 @@ public class BoardDao {
 					 + 	 "FROM board b "
 					 + 	 "LEFT JOIN member m "
 					 +   "ON b.m_no = m.m_no "
+					 + 	 "WHERE b.type='nomal' "
 					 + whereSql
-					 +   "ORDER BY b_no DESC) a "
+					 +   "ORDER BY " + filter + " DESC) a "
 				 + ") "+
 				 "WHERE rnum BETWEEN ? AND ?";
+		 
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -106,13 +108,11 @@ public class BoardDao {
 			} else {
 				pstmt.setInt(1, startRow);
 				pstmt.setInt(2, endRow);
-				
 			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Board board = new Board();
 				board.setbNo(rs.getInt("b_no"));
-				board.setmNo(rs.getInt("m_no"));
 				board.setWriter(rs.getString("m_name"));
 				board.setTitle(rs.getString("b_title"));
 				board.setbDate(rs.getDate("b_date"));
@@ -136,7 +136,8 @@ public class BoardDao {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT " 
+		String sql = 
+				"SELECT " 
 				+ "b.b_no, b.m_no, b.b_title, b.re_cnt, b_content, b.like_cnt, b.b_date, b.b_hits, m.m_name " 
 				+ "FROM board b " 
 				+ "LEFT JOIN member m " 
@@ -326,6 +327,53 @@ public class BoardDao {
 		}
 		
 		
+	}
+
+	public List<Board> noticeList() throws SQLException {
+		List<Board> noticeList = new ArrayList<Board>();
+		Connection conn =getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = 
+				"SELECT * FROM ( "
+						 + "SELECT rownum rnum, a.* "
+						 + "FROM "
+						 + "( "
+						 +	 "SELECT "
+						 + 		"b.b_no, b.m_no, b.b_title, b.re_cnt, b.like_cnt, b.b_date, b.b_hits, m.m_name "
+						 + 	 "FROM board b "
+						 + 	 "LEFT JOIN member m "
+						 +   "ON b.m_no = m.m_no "
+						 +	 "WHERE b.type='notice'"
+						 +   "ORDER BY b_no DESC) a "
+					 + ") "+
+					 "WHERE rnum BETWEEN 1 AND 2";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board board = new Board();
+				board.setbNo(rs.getInt("b_no"));
+				board.setWriter(rs.getString("m_name"));
+				board.setTitle(rs.getString("b_title"));
+				board.setbDate(rs.getDate("b_date"));
+				board.setHits(rs.getInt("b_hits"));
+				board.setLikeCnt(rs.getInt("like_cnt"));
+				board.setReCnt(rs.getInt("re_cnt"));
+				
+				noticeList.add(board);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) conn.close();
+			if (pstmt != null) pstmt.close();
+			if (rs != null) rs.close();
+		}
+		
+		return noticeList;
 	}	
 }
 

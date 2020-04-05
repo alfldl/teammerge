@@ -72,6 +72,15 @@ public class Board {
 	public void setHits(int hits) {
 		Hits = hits;
 	}
+	@Override
+	public String toString() {
+		return "Board [bNo=" + bNo + ", mNo=" + mNo + ", writer=" + writer + ", title=" + title + ", content=" + content
+				+ ", reCnt=" + reCnt + ", likeCnt=" + likeCnt + ", bDate=" + bDate + ", Hits=" + Hits + "]";
+	}
+	
+	
+	
+	
 	
 	
 }
