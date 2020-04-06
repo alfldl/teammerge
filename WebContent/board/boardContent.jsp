@@ -24,13 +24,13 @@ text-decoration: none;
 
 <div class=gongback></div>
 <div id="wrap">
-	<div>${board.title } 
+	<div><c:out value="${board.title }" /> 
 		<div style="float: right">${board.bDate }</div>
 	</div>
 <hr>	
 	<section>
 		<article>
-			${board.content }
+			<c:out value='${board.content }' />
 		</article>
 	</section>
 	
@@ -79,7 +79,7 @@ text-decoration: none;
 	<ul>
 		<c:forEach var="reply" items="${replyList }">
 			<li>
-			${reply.content } 
+			<c:out value='${reply.content }' /> 
 			${reply.writer } 
 			${reply.date } 
 				<c:if test="${mNo eq reply.mNo }">

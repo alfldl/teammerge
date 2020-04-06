@@ -92,7 +92,7 @@ table {
 				<tr style="text-align: center">
 					<td>${ board.bNo}</td>
 					<td><a href='boardContent.do?bNo=${board.bNo}&pageNum=${currentPage}'>
-						${ board.title}</a> &nbsp;[ ${ board.reCnt } ]</td>
+					<c:out value="${ board.title}" /></a> &nbsp;[ ${ board.reCnt } ]</td>
 					<td>${ board.writer}</td>
 					<td>${ board.bDate}</td>
 					<td>${ board.hits}</td>
