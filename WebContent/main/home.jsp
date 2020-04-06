@@ -158,7 +158,7 @@ if( error == "true") alert("로그인후 이용가능합니다.");
 			<input type="hidden" name="title" value="[고객문의글]" >
 			<input type="hidden" name="pageNum" value="1">
 			<input type="hidden" name="type" value="QnA">
-			<textarea name="content" class="a" placeholder="불편사항이나 제안사항이 있으신가요? 레시피를 부탁해에 전하고 싶은 의견을 남겨주세요.">
+			<textarea style="resize: none" name="content" class="a" placeholder="불편사항이나 제안사항이 있으신가요? 레시피를 부탁해에 전하고 싶은 의견을 남겨주세요.">
 			</textarea>
 			<input class="b" type="submit" value="의견제출">
 		</form>
