@@ -13,6 +13,7 @@
 .board-con2 {
 	height: 60%;
 	border-bottom: 2px solid black;
+	overflow: auto;
 }
 .board-tb {
 	width: 100%;
