@@ -33,7 +33,7 @@ if (error == "true") {
 			<tr>
 				<td>		
 					<input type="text" name="title" required="required" 
-						value="${board.title }" size="100">
+						size="100" value="${board.title }" >
 				</td>
 			</tr>		
 			
