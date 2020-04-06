@@ -1,6 +1,7 @@
 package service.board;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,16 +21,20 @@ public class BoardWriteProAction implements CommandProcess {
 		
 		request.setCharacterEncoding("utf-8");
 		String pageNum = request.getParameter("pageNum");
+		String type = request.getParameter("type");
 		
 		HttpSession session = request.getSession();
 		LoginUser user = (LoginUser)session.getAttribute("user");
+		if (user == null) {
+			return "redirect:home.do?error=true";
+		}
 		int mNo = user.getM_no();
 		
 		Board board = new Board();
-		board.setbNo(Integer.parseInt(request.getParameter("bNo")));
 		board.setmNo(mNo);
 		board.setTitle(request.getParameter("title"));
 		board.setContent(request.getParameter("content"));
+		board.setType(type);
 		
 		try {
 			BoardDao boardDao = BoardDao.getInstance();

@@ -22,6 +22,7 @@ if (error == "true") {
 <div id="wrap">
 	<form action="boardWritePro.do?pageNum=${pageNum }" method="post">
 		<input type="hidden" name="bNo" value="${bNo }">
+		<input type="hidden" name="type" value="normal">
 
 	<table>
 		<caption>

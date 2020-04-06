@@ -86,11 +86,11 @@ public class BoardDao {
 					 + "FROM "
 					 + "( "
 					 +	 "SELECT "
-					 + 		"b.b_no, b.m_no, b.b_title, b.re_cnt, b.like_cnt, b.b_date, b.b_hits, m.m_name "
+					 + 		"b.b_no, b.m_no, b.b_title, b.re_cnt, b.like_cnt, b.b_date, b.b_hits, m.m_name, b.type "
 					 + 	 "FROM board b "
 					 + 	 "LEFT JOIN member m "
 					 +   "ON b.m_no = m.m_no "
-					 + 	 "WHERE b.type='nomal' "
+					 + 	 "WHERE b.type in ('normal','QnA')"
 					 + whereSql
 					 +   "ORDER BY " + filter + " DESC) a "
 				 + ") "+
@@ -119,6 +119,7 @@ public class BoardDao {
 				board.setHits(rs.getInt("b_hits"));
 				board.setLikeCnt(rs.getInt("like_cnt"));
 				board.setReCnt(rs.getInt("re_cnt"));
+				board.setType(rs.getString("type"));
 				
 				list.add(board);
 			}	
@@ -138,7 +139,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		String sql = 
 				"SELECT " 
-				+ "b.b_no, b.m_no, b.b_title, b.re_cnt, b_content, b.like_cnt, b.b_date, b.b_hits, m.m_name " 
+				+ "b.b_no, b.m_no, b.b_title, b.re_cnt, b_content, b.like_cnt, b.b_date, b.b_hits, m.m_name, b.type " 
 				+ "FROM board b " 
 				+ "LEFT JOIN member m " 
 				+ "ON b.m_no = m.m_no " 
@@ -160,6 +161,7 @@ public class BoardDao {
 				board.setbDate(rs.getDate("b_date"));
 				board.setHits(rs.getInt("b_hits"));
 				board.setReCnt(rs.getInt("re_cnt"));
+				board.setType(rs.getString("type"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -195,7 +197,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO board VALUES( " 
 				+ "b_no.nextval, ?, ?, ?, "
-				+ "0, 0, sysdate, 0, 'nomal')";
+				+ "0, 0, sysdate, 0, ?)";
 		
 		try {
 			conn = getConnection();
@@ -203,6 +205,7 @@ public class BoardDao {
 			pstmt.setInt(1, board.getmNo());
 			pstmt.setString(2, board.getTitle());
 			pstmt.setString(3, board.getContent()); 
+			pstmt.setString(4, board.getType());
 			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();

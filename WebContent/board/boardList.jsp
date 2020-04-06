@@ -103,8 +103,8 @@ function gofilter() {
 				</c:if>
 				<c:if test="${totalCnt > 0 }">
 					<c:forEach items="${list}" var="board">
-						<tr style="text-align: center">
-							<td>${ board.bNo}</td>
+						<tr style="text-align: center; <c:if test='${board.type eq "QnA"}'> background-color: powderblue</c:if>">
+							<td>${ board.bNo} </td>
 							<td><a href='boardContent.do?bNo=${board.bNo}&pageNum=${currentPage}'>
 							<c:out value="${ board.title}" /></a> &nbsp;[ ${ board.reCnt } ]</td>
 							<td>${ board.writer}</td>

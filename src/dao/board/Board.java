@@ -13,8 +13,15 @@ public class Board {
 	private int likeCnt;
 	private Date bDate;
 	private int Hits;
+	private String type;
 	
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public int getmNo() {
 		return mNo;
 	}

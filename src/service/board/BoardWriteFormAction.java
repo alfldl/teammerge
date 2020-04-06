@@ -18,7 +18,6 @@ public class BoardWriteFormAction implements CommandProcess {
 		System.out.println("BoardWriteAction start..");
 		
 		try {
-			int bNo = 0; 
 			String pageNum = request.getParameter("pageNum");
 			if (pageNum == null) pageNum = "1";
 			
@@ -29,7 +28,6 @@ public class BoardWriteFormAction implements CommandProcess {
 			System.out.println("mNo----->" + mNo);
 			
 			request.setAttribute("mNo", mNo);
-			request.setAttribute("bNo", bNo);
 			request.setAttribute("pageNum", pageNum);
 			
 		} catch(Exception e) {

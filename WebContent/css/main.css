@@ -211,14 +211,14 @@ border-style:inset;
 width:10%;	
 border-color:#8C8CF5;
 }
-input.a {
+textarea.a {
 width:600px;
  height:200px;
  float:right;
  position: relative;
 right:100px;
 bottom:10px; 
-z-index: -1;
+
 }
 input.b {
 float:right;
@@ -231,7 +231,7 @@ border-radius: 4px;
 font:14px,"Noto Sans KR",sans-serif;
 background: white;
 padding: 10px 10px;
-z-index: -1;
+
 }
 input.b:hover{
 background-color:lightgray;
@@ -243,8 +243,4 @@ border: none;
 border-radius: 5px;
 background-color:#ddd;
 
-}
-.footer {
-	z-index:-1;
-	
 }
