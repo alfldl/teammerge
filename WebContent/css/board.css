@@ -108,7 +108,7 @@ td > div.notice-txt{
 	padding: 10px 20px;
 }
 .board-content-con2 {
-	height: 40%;
+	height: auto;
 	padding: 25px 10px;
 	font-size: 18px;
 }
@@ -144,6 +144,7 @@ td > div.notice-txt{
 	padding: 38px 50px; 
 	cursor: pointer;
 	font-weight: bold;
+	font-size: 15px;;
 	background-color:#ddd;
 	float:right;
 	position: relative;
@@ -161,9 +162,10 @@ td > div.notice-txt{
 }
 .list-btn {
 	border-radius: 4px;
-	padding: 8px 15px;
+	padding: 15px 40px;
 	cursor: pointer;
 	color: white;
 	background-color:#3498DB;
+	float:right;
 }
 

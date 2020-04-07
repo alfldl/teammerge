@@ -8,10 +8,12 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <%@ include file="../header.jsp"%>
+
 <script type="text/javascript">
 var error ="${param.error}"
 if( error == "true") alert("로그인후 이용가능합니다.");
 </script>
+
 </head>
 <body>
 
