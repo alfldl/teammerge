@@ -2,18 +2,20 @@
 
 .board-gb {
 	width: 100%;
-	height: 70px;
+	height: 100px;
 }
-#board-con {
+#board-wrap {
 	height: 100vh;
 	width: 70%;
 	margin: auto;
 }
-.board-con1 {height: 12%;}
+.board-con1 {height: 10%;}
 .board-con2 {
-	height: 60%;
-	border-bottom: 2px solid black;
 	overflow: auto;
+	border-bottom: 2px solid black;
+}
+.board-con3 {
+	margin-top:10px;
 }
 .board-tb {
 	width: 100%;
@@ -26,11 +28,11 @@
 	 background-color: #333;
 	 color: white;
 }
-.board-tb tr:hover{background-color: #ddd;}
-.board-tb td {padding: 5px;}
+.board-tb tr:hover {background-color: #ddd;}
+.board-tb td {padding: 8px;}
 
-.write-button {
-	 background-color: #808080;
+.write-btn {
+	 background-color: #666;
 	 border: none;
 	 color: white;
 	 padding: 10px 25px;
@@ -61,3 +63,42 @@ td > div.notice-txt{
 	margin-top: 10px;
 }
 
+.board-write-con1 {height: 5%;}
+.board-wirte-con2 {
+	overflow: auto;
+	
+}
+.insert-btn {
+	text-align:center;
+	margin-top:10px;
+}
+
+.title-td {
+	border-bottom: 2px solid gray;
+	padding: 10px 0px;
+} 
+.title-td > input {
+	height: 30px;
+	border-radius: 4px;
+	font-size: 18px;
+}
+.content-td {
+	margin-top: 15px;
+	border-radius: 4px;
+	font-size: 20px;
+	resize: none;
+}
+.submit-btn {
+	border-radius: 4px;
+	padding: 8px 15px;
+	cursor: pointer;
+	color: white;
+	background-color:#3498DB;
+}
+.cnxl-btn {
+	border-radius: 4px;
+	padding: 8px 15px;
+	cursor: pointer;
+	color: white;
+	background-color: #666;
+}

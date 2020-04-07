@@ -5,12 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Board Update</title>
-<%@ include file="../header.jsp" %>
-<style>
-.gongback {
-	height: 100px;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="css/board.css">
 
 <script>
 var error = "${param.error}"
@@ -18,40 +13,45 @@ if (error == "true") {
 	alert("요청이 잘못되었습니다.")
 }
 </script>
+</head>
 
-<div class="gongback"></div>
-<div id="wrap">
-	<form action="boardUpdatePro.do" method="post">
-		<input type="hidden" name="bNo" value="${bNo }">
-		<input type="hidden" name="pageNum" value="${pageNum }">
-		
-	<table>
-			<caption>
-				<h2>게시글수정</h2>
-			</caption>
-			
-			<tr>
-				<td>		
-					<input type="text" name="title" required="required" 
-						size="100" value="${board.title }" >
-				</td>
-			</tr>		
-			
-			<tr>
-				<td><textarea  style="resize: none" rows="20" cols="105" name="content"
-					required="required">${board.content }</textarea>
-				</td>
-			</tr>		
-					
-			<tr>
-				<td>
-					<input type="submit" value="수정">
-					<input type="button" value="취소" onclick="history.back()">
-				</td>
-			</tr>	
+<body>
+	<%@ include file="../header.jsp" %>
+	<div class="board-gb"></div>
+	<div id="board-wrap">
+		<div class="board-write-con1">
+			<h2>게시글수정</h2>
+		</div>	
+		<div class="board-wirte-con2">
+			<form action="boardUpdatePro.do" method="post">
+				<input type="hidden" name="bNo" value="${bNo }">
+				<input type="hidden" name="pageNum" value="${pageNum }">
+			<table>
+				<tr>
+					<td class="title-td">		
+						<input type="text" name="title" required="required" 
+							size="110" value="${board.title }" >
+					</td>
+				</tr>		
 				
+				<tr>
+					<td><textarea  class="content-td" rows="15" cols="101" name="content"
+						required="required">${board.content }</textarea>
+					</td>
+				</tr>		
+						
+				<tr>
+					<td>
+						<div class="insert-btn">
+							<input class="submit-btn" type="submit" value="수정">
+							<input class="cnxl-btn" type="button" value="취소" onclick="history.back()">
+						</div>
+					</td>
+				</tr>	
 			</table>		
-		</form>
-</div>
-
+			</form>
+		</div>
+	</div>
+</body>
 <%@ include file="../footer.jsp" %>
+</html>

@@ -39,7 +39,7 @@ public class BoardListAction implements CommandProcess {
 			} 
 			
 			int currentPage = Integer.parseInt(pageNum); 
-			int pageSize  = 10, blockSize = 3; 
+			int pageSize  = 15, blockSize = 3; 
 			int startRow = (currentPage - 1) * pageSize + 1;  
 			int endRow   = startRow + pageSize - 1;          
 			int startNum = totalCnt - startRow + 1; 

@@ -25,15 +25,14 @@ function gofilter() {
 	var formTag = document.getElementById("filterForm");
 	formTag.submit();
 }
-
 </script>
-
 </head>
+
 <body>
 	<%@ include file="../header.jsp" %>
 
 	<div class="board-gb"></div>
-	<div id="board-con">
+	<div id="board-wrap">
 		<div class="board-con1">
 			<h2 >자유게시판</h2>
 				<form action="boardList.do" id="icon">
@@ -74,7 +73,7 @@ function gofilter() {
 					</c:if>
 					<c:if test="${totalCnt > 0 }">
 						<c:forEach items="${list}" var="board">
-							<tr style="text-align: center; <c:if test='${board.type eq "QnA"}'> background-color: powderblue</c:if>">
+							<tr <c:if test='${board.type eq "QnA"}'>style="background-color:powderblue"</c:if>>
 								<td>${ board.bNo} </td>
 								<td class="board-list"><a href='boardContent.do?bNo=${board.bNo}&pageNum=${currentPage}'>
 								<c:out value="${ board.title}" /></a> &nbsp;[${ board.reCnt }]</td>
@@ -90,7 +89,7 @@ function gofilter() {
 		<div class="board-con3">
 			<div>
 				<c:if test="${user ne null }">
-					<a href="boardWriteForm.do" class="write-button">글쓰기</a>
+					<a href="boardWriteForm.do" class="write-btn">글쓰기</a>
 				</c:if>
 			</div>
 			<div>

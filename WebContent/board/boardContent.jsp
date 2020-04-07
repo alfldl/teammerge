@@ -1,32 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!DOCTYPE>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BoardContent</title>
+<link rel="stylesheet" type="text/css" href="css/board.css">
 
-<%@ include file="../header.jsp" %>
 <script>
 var isDelete = "${param.delete}"
 if (isDelete == "false") {
 	alert("잘못된 요청입니다.");
 }
 </script>
+
 <style>
-.gongback {
-	height: 100px;
-}
+
 .likes {
 text-decoration: none;
 }
 </style>
+</head>
 
-<div class=gongback></div>
-<div id="wrap">
-	<div><c:out value="${board.title }" /> 
-		<div style="float: right">${board.bDate }</div>
-	</div>
+<body>
+	<%@ include file="../header.jsp" %>
+	<div class="board-gb"></div>
+	<div id="board-wrap">
+		<div><c:out value="${board.title }" /> 
+			<div style="float: right">${board.bDate }</div>
+		</div>
 <hr>	
 	<section>
 		<article>
