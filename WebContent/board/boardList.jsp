@@ -119,5 +119,5 @@ function gofilter() {
 		</div>
 	</div>
 </body>
-<%@ include file="../footer.jsp" %>
+	<%@ include file="../footer.jsp" %>
 </html>

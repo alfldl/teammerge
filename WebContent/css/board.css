@@ -14,9 +14,8 @@
 	overflow: auto;
 	border-bottom: 2px solid black;
 }
-.board-con3 {
-	margin-top:10px;
-}
+.board-con3 {margin-top:10px;}
+
 .board-tb {
 	width: 100%;
 	border-collapse: collapse;
@@ -74,18 +73,18 @@ td > div.notice-txt{
 }
 
 .title-td {
-	border-bottom: 2px solid gray;
+	border-bottom: 2px solid grey;
 	padding: 10px 0px;
 } 
 .title-td > input {
-	height: 30px;
+	height: 35px;
 	border-radius: 4px;
 	font-size: 18px;
 }
 .content-td {
 	margin-top: 15px;
 	border-radius: 4px;
-	font-size: 20px;
+	font-size: 18px;
 	resize: none;
 }
 .submit-btn {
@@ -102,3 +101,69 @@ td > div.notice-txt{
 	color: white;
 	background-color: #666;
 }
+.board-content-con1 {
+	border-bottom: 2px solid grey;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 10px 20px;
+}
+.board-content-con2 {
+	height: 40%;
+	padding: 25px 10px;
+	font-size: 18px;
+}
+.board-content-con3 {
+
+}
+.likes {
+	text-decoration: none;
+	font-family: 'Single Day', cursive;
+	font-weight: bold;
+	font-size: 25px;
+	color: black;
+
+}
+.contents-btns {text-align:right;}
+.heart{color: red;}
+
+.board-writer {
+	position: relative;
+	bottom: 20px;
+	font-family: 'Single Day', cursive;
+	font-weight: bold;
+	font-size: 25px;
+}
+.reply-box {
+	resize: none; 
+	width: 60%; 
+	height: 90px;
+	margin-top:10px;
+}
+.reply-btn {
+	border-radius: 4px;
+	padding: 38px 50px; 
+	cursor: pointer;
+	font-weight: bold;
+	background-color:#ddd;
+	float:right;
+	position: relative;
+	right: 29%;
+	top: 8px;
+/*	bottom: 42px; */
+}
+.reply-ul {
+	list-style-type: none;
+	
+}
+.reply-ul > li span {
+	margin: 30px;
+	padding: 10px;
+}
+.list-btn {
+	border-radius: 4px;
+	padding: 8px 15px;
+	cursor: pointer;
+	color: white;
+	background-color:#3498DB;
+}
+

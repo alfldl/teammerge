@@ -35,7 +35,7 @@ if (error == "true") {
 					</tr>		
 					<tr>
 						<td>
-							<textarea class="content-td" rows="15" cols="101" name="content"
+							<textarea class="content-td" rows="15" cols="112" name="content"
 								required="required" placeholder="내용을 입력하세요"></textarea>
 						</td>
 					</tr>		

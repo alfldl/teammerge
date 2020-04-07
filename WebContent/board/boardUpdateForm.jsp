@@ -35,7 +35,7 @@ if (error == "true") {
 				</tr>		
 				
 				<tr>
-					<td><textarea  class="content-td" rows="15" cols="101" name="content"
+					<td><textarea  class="content-td" rows="15" cols="112" name="content"
 						required="required">${board.content }</textarea>
 					</td>
 				</tr>		
@@ -53,5 +53,5 @@ if (error == "true") {
 		</div>
 	</div>
 </body>
-<%@ include file="../footer.jsp" %>
+	<%@ include file="../footer.jsp" %>
 </html>
