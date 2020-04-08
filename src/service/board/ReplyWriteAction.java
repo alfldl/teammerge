@@ -29,7 +29,7 @@ public class ReplyWriteAction implements CommandProcess {
 		LoginUser user = (LoginUser) session.getAttribute("user");
 		int mNo = user.getM_no();
 		System.out.println("mNo------>" + mNo);
-		
+		System.out.println("bNo------->" + bNo);
 		
 		try {
 			BoardDao boardDao = BoardDao.getInstance();

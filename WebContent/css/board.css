@@ -113,7 +113,7 @@ td > div.notice-txt{
 	font-size: 18px;
 }
 .board-content-con3 {
-
+	margin: 50px 0px 30px 0px;
 }
 .likes {
 	text-decoration: none;
@@ -123,7 +123,10 @@ td > div.notice-txt{
 	color: black;
 
 }
-.contents-btns {text-align:right;}
+.contents-btns {
+	text-align:right;
+	margin: 20px 0px;
+}
 .heart{color: red;}
 
 .board-writer {
@@ -169,3 +172,9 @@ td > div.notice-txt{
 	float:right;
 }
 
+.re-writer {
+	font-family: 'Single Day', cursive;
+	font-size: 18px;
+	font-weight: bold;
+	color: #0080c0;
+}

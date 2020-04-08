@@ -33,43 +33,42 @@ if (isDelete == "false") {
 				</article>
 			</section>
 		</div>
-		<div class="board-content-con3">
-			<c:if test="${mNo ne null }">
-				<div class="contents-btns">
-					<a href='like.do?bNo=${board.bNo}&pageNum=${pageNum}' class="likes">
-							좋아요
-						<c:choose>
-						   	<c:when test="${isLike eq 0 }">♡ </c:when>
-						   	<c:otherwise><span class="heart">♥</span></c:otherwise>
-						  </c:choose>     
-					</a>
-			<c:if test="${mNo eq board.mNo }">
-	
-				<button class="submit-btn" onclick="location.href='boardUpdateForm.do?bNo=${board.bNo}&pageNum=${pageNum}'">
-				           수정
-				 </button>           
-				<button class="cnxl-btn" onclick="location.href='boardDeletePro.do?bNo=${board.bNo}&pageNum=${pageNum}'">
-				            삭제
-				</button>
-			</c:if>
-				</div>
-			</c:if>	
-		</div>
 		<div>
+			<div class="contents-btns">
+				<c:if test="${mNo ne null }">
+						<a href='like.do?bNo=${board.bNo}&pageNum=${pageNum}' class="likes">
+								좋아요
+							<c:choose>
+							   	<c:when test="${isLike eq 0 }">♡ </c:when>
+							   	<c:otherwise><span class="heart">♥</span></c:otherwise>
+							  </c:choose>     
+						</a>
+				</c:if>			
+				<c:if test="${mNo eq board.mNo }">
+					<button class="submit-btn" onclick="location.href='boardUpdateForm.do?bNo=${board.bNo}&pageNum=${pageNum}'">
+					           수정
+					 </button>           
+					<button class="cnxl-btn" onclick="location.href='boardDeletePro.do?bNo=${board.bNo}&pageNum=${pageNum}'">
+					            삭제
+					</button>
+				</c:if>
+			</div>
+		</div>
+		<div class="board-content-con3">
 			<img src="img/board/user.png">
 			<span class="board-writer"> ${board.writer } </span>
 		</div>
 		<div>
-			<form action="replyWrite.do" method="post">
-				<div>
-					<button class="reply-btn">
-						등록
-					</button>
-				</div>	
-				<c:if test="${mNo ne null }">
+			<c:if test="${mNo ne null }">
+				<form action="replyWrite.do" method="post">
 					<input type="hidden" name="bNo" value="${bNo }">
 					<input type="hidden" name="pageNum" value="${pageNum }">
-					<textarea class="reply-box" name="content"></textarea>
+						<div>
+							<button class="reply-btn">
+								등록
+							</button>
+						</div>	
+						<textarea class="reply-box" name="content"></textarea>
 			</form>
 				</c:if>	
 		</div>
@@ -77,9 +76,9 @@ if (isDelete == "false") {
 			<ul class="reply-ul">
 				<c:forEach var="reply" items="${replyList }">
 					<li>
-						<span id="1"><c:out value='${reply.content }' /></span>
-						<span id="2">${reply.writer } </span>
-						<span id="3">${reply.date } </span>
+						<c:out value='${reply.content }' />
+						<span class="re-writer"> ${reply.writer } </span>
+						${reply.date }
 							<c:if test="${mNo eq reply.mNo }">
 								<a href='replyDelete.do?pageNum=${pageNum }&bNo=${bNo }&brNo=${reply.brNo }' >
 								X
