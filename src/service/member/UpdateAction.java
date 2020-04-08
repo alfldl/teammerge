@@ -16,15 +16,10 @@ public class UpdateAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("m_id");
-		MemberDao md = MemberDao.getInstance();
-		Member member = md.info(m_id);
-		
-		request.setAttribute("info", member);
-		
+		try {
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return "member/updateForm.jsp";
 	}
-
 }

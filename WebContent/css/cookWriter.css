@@ -1,18 +1,51 @@
 @charset "UTF-8";
-
-#writer {
+#thumimg {
+	width: 200px;
+	height: 140px;
+}
+.con0 {
+	width: 100%;
+	height: 100%;
+	border: 1px solid black;
+	
+}
+#submit {
 	position: relative;
-	left: 510px;
-	bottom: 20px;
+	bottom: 10px;
+	
+}
+#table1 {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+	height: 200px;
+	padding: 10px;
+}
+
+#table2 {
+	position: relative;
+	top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+	height: 300px;
+	padding: 10px;
+}
+#btn1 {
+	position: relative;
+	top: 15px;
+	left: 500px;
 }
 .gong {
 	width: 100%;
-	height: 50px;
+	height: 70px;
+	
 }
 .grid_con {
 	display: grid;
-	grid-template-rows: 250px 250px 250px 440px;
-	max-height: 1400px;
+	grid-template-rows: auto;
+	max-height: auto;
 	grid-template-columns: auto;
 	max-width: 1200px;
 	grid-gap: 30px;
@@ -27,6 +60,7 @@
 	background-color: #ddd;
 	text-align: center;
 	padding-top: 20px;
+	padding-bottom: 20px;
 	font-size: 18px;
 }
 
@@ -36,14 +70,18 @@
 }
 
 .con2 {
-	grid-row: 2/5;
+	grid-row: 2/3;
+	grid-column: 1/2;
+}
+.con3 {
+	grid-row: 3/4;
 	grid-column: 1/2;
 }
 
 #cate_box {
 	width: 1100px;
 	height: 210px;
-	border-bottom: 1px solid white;
+	border: 1px solid white;
 	border-radius: 10px;
 	margin-left: auto;
 	margin-right: auto;
@@ -51,11 +89,18 @@
 
 #recipe_box {
 	width: 1100px;
-	height: 915px;
+	max-height: 3000px;
 	border: 1px solid white;
 	border-radius: 10px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: auto;
+}
+#recipe_box2 {
+	width: 1100px;
+	height: 600px;
+	max-height: 3000px;
+	border: 1px solid white;
+	border-radius: 10px;
+	margin: auto;
 }
 
 #cate_list {
@@ -77,7 +122,7 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	float: left;
-	margin-left: 20px;
+	margin-left: 18px;
 	margin-top: 5px;
 	max-width: 250px;
 	max-height: 100%;
@@ -99,61 +144,8 @@
 }
 
 .recipe_items img {
-	width: 195px;
+	width: 200px;
 	height: 150px;
 	border: solid white 1px;
 	border-radius: 10px;
-}
-
-#pageNum {
-	width: 300px;
-	height: 30px;
-	border: solid 1px white;
-	border-radius: 10px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 15px;
-}
-
-#pageNum ul {
-	position: relative;
-	left: 30px;
-	bottom: 15px;
-}
-
-#pageNum li {
-	list-style: none;
-	float: left;
-	text-align: center;
-	margin-left: 20px;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:link {
-	color: black;
-}
-a:visited {
-	color: black;
-}
-#pageNum a:active {
-	color: green;
-}
-a:hover {
-	color: black;
-}
-#writer {
-	font-size: 17px;
-}
-#vc {
-	font-size: 15px;
-	text-align: right;
-}
-.mylist>div {
-	background-color: #ddd;
-	text-align: center;
-	padding-top: 20px;
-	font-size: 18px;
 }

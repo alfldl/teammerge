@@ -13,6 +13,12 @@ public class JoinAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		try{
+			 response.setCharacterEncoding("utf-8");
+			 request.setCharacterEncoding("utf-8");
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return "member/joinForm.jsp";
 	}
 

@@ -11,13 +11,15 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import dao.ingredient.Ingredient;
+import dao.recipe.Recipe;
+
 public class CookDao {
 	Connection con = null;
 	Statement stmt = null;
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 	private static CookDao instance;
-
 	private CookDao() {
 	}
 
@@ -52,7 +54,6 @@ public class CookDao {
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				cook = new Cook();
 				cook.setC_no(rs.getInt(2));
@@ -61,9 +62,8 @@ public class CookDao {
 				cook.setC_category(rs.getString(5));
 				cook.setC_img(rs.getString(6));
 				cook.setC_hits(rs.getString(7));
-				cook.setC_po(rs.getString(8));
-				cook.setC_date(rs.getDate(9));
-				cook.setM_nickname(rs.getString(10));
+				cook.setC_date(rs.getDate(8));
+				cook.setM_nickname(rs.getString(9));
 				list.add(cook);
 			}
 
@@ -71,11 +71,10 @@ public class CookDao {
 			e.printStackTrace();
 		} finally {
 			rs.close();
-			stmt.close();
+			pstmt.close();
 			con.close();
 		}
 		return list;
-
 	}
 
 	public List<Cook> getCook2(int startRow, int endRow, String c_category) throws Exception {
@@ -92,7 +91,6 @@ public class CookDao {
 			pstmt.setInt(3, endRow);
 			System.out.println(c_category);
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				cook = new Cook();
 				cook.setC_no(rs.getInt(2));
@@ -101,17 +99,15 @@ public class CookDao {
 				cook.setC_category(rs.getString(5));
 				cook.setC_img(rs.getString(6));
 				cook.setC_hits(rs.getString(7));
-				cook.setC_po(rs.getString(8));
-				cook.setC_date(rs.getDate(9));
-				cook.setM_nickname(rs.getString(10));
+				cook.setC_date(rs.getDate(8));
+				cook.setM_nickname(rs.getString(9));
 				list.add(cook);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			rs.close();
-			stmt.close();
+			pstmt.close();
 			con.close();
 		}
 		return list;
@@ -119,7 +115,6 @@ public class CookDao {
 	}
 
 	public Cook select(int c_no) throws SQLException {
-		
 		String sql = "select * from cook where c_no=?";
 		Cook cook = null;
 		try {
@@ -132,13 +127,10 @@ public class CookDao {
 				cook.setC_no(rs.getInt("c_no"));
 				cook.setM_no(rs.getInt("m_no"));
 				cook.setC_name(rs.getString("c_name"));
-				System.out.println("DAOcname = " + rs.getString("c_name"));
 				cook.setC_category(rs.getString("c_category"));
 				cook.setC_img(rs.getString("c_img"));
 				cook.setC_hits(rs.getString("c_hits"));
-				cook.setC_po(rs.getString("c_po"));
 				cook.setC_date(rs.getDate("c_date"));
-
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -153,21 +145,18 @@ public class CookDao {
 		return cook;
 	}
 
-	public int insert(Cook cook) throws SQLException {
+	public int insert(Cook cook, List<String> fileList) throws SQLException {
 		int result = 0;
-		String sql = "insert into cook values(c_no.nextval,?,?,?,?,?,?,sysdate)";
+		String file = fileList.get(fileList.size()-1);
+		String sql = "insert into cook values(c_no.nextval,?,?,?,?,0,sysdate)";
 		try {
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, cook.getM_no());
 			pstmt.setString(2, cook.getC_name());
 			pstmt.setString(3, cook.getC_category());
-			pstmt.setString(4, cook.getC_img());
-			pstmt.setString(5, cook.getC_hits());
-			pstmt.setString(6, cook.getC_po());
-
+			pstmt.setString(4, file);
 			result = pstmt.executeUpdate();
-
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -245,8 +234,6 @@ public class CookDao {
 	
 	public int cookInsert(Cook cook) throws Exception {
 		int result = 0;
-		Connection con = null;
-		PreparedStatement pstmt = null;
 		String sql = "insert into cook values(c_no.nextval,?,?,?,0,?,sysdate)";
 		try {
 			con = getConnection();
@@ -266,9 +253,6 @@ public class CookDao {
 	}
 	
 	public List<Cook> getImg() throws Exception {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		Cook cook = null;
 		String sql = "select * from cook order by c_hits";
 		List<Cook> list = new ArrayList<>();
@@ -276,7 +260,6 @@ public class CookDao {
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
 			while(rs.next()) {
 				cook = new Cook(); // 반복문으로 객체 반복생성 (대충 기억하기)
 				cook.setC_no(rs.getInt(1));
@@ -318,19 +301,15 @@ public class CookDao {
 				cook.setC_category(rs.getString(4));
 				cook.setC_img(rs.getString(5));
 				cook.setC_hits(rs.getString(6));
-				cook.setC_po(rs.getString(7));
-				cook.setC_date(rs.getDate(8));
-				cook.setM_nickname(rs.getString(9));
+				cook.setC_date(rs.getDate(7));
+				cook.setM_nickname(rs.getString(8));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (con != null)
-				con.close();
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
 		}
 		return cook;
 	}
@@ -339,11 +318,9 @@ public class CookDao {
 		Connection conn = null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		Cook cook = null;
 		int result = 0; 
 		String sql="delete from cook where c_no=?";
 		try {
-			String cdm_nickname ="";
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, c_no);
@@ -351,12 +328,9 @@ public class CookDao {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (conn != null)
-				conn.close();
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn != null) conn.close();
 		}
 		return result;
 	}
@@ -369,74 +343,219 @@ public class CookDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, cook.getC_name());
 			pstmt.setString(2, cook.getC_category());
-			pstmt.setString(3, cook.getC_po());
 			pstmt.setInt(4, cook.getC_no());
 			result = pstmt.executeUpdate();
-			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (con != null)
-				con.close();
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		}
+		return result;
+	}
+	
+	public Cook getCno(String c_name) throws Exception {
+		String sql = "select c_no from cook where c_name=?";
+		Cook cook = null;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, c_name);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cook = new Cook();
+				cook.setC_no(rs.getInt("c_no"));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		}
+		return cook;
+	}
+	
+	public int insertIngre(Cook c_no, List<Ingredient> iNo) throws SQLException {
+		int result = 0;
+		String sql = "insert into recipe(c_no, i_no) values(?, ?)";
+		try {
+			con = getConnection();
+			for(int i=0; i<iNo.size(); i++) {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, c_no.getC_no());
+				pstmt.setInt(2, iNo.get(i).getI_no());
+				result = pstmt.executeUpdate();
+			}
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if (rs !=null) rs.close();
+			if (stmt != null) stmt.close();
+			if (con !=null) con.close();
 		}
 		return result;
 	}
 
-	public int bookmarkroad(String c_no) throws SQLException {
-		String sql = "SELECT bookmark.bm, cook.c_no, cook.m_no "
-				+ "FROM cook join bookmark on bookmark.c_no = cook.c_no "
-				+ "where cook.c_no=?";
-		
+	public List<Ingredient> getItems(int c_no) throws Exception {
+		String sql = "select ingredient.* from ingredient join recipe on "
+				+ "recipe.i_no = ingredient.i_no where c_no=?";
+		List<Ingredient> list = new ArrayList<>();
 		try {
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, c_no);
+			pstmt.setInt(1, c_no);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				return rs.getInt(1);
+
+			while (rs.next()) {
+				Ingredient ing = new Ingredient();
+				ing.setI_no(rs.getInt(1));
+				ing.setI_catego(rs.getString(2));
+				ing.setI_item(rs.getString(3));
+				ing.setI_img(rs.getString(4));
+				list.add(ing);
 			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (con != null) con.close();
-			if (pstmt != null) pstmt.close();
-			if (rs != null) rs.close();
-		}
-		return 0;
-	}
-
-	public void bookmarkOn(String c_no) throws SQLException {
-		String sql ="Update bookmark SET bm = bm+1 WHERE c_no="+c_no;
-		try {
-			con = getConnection();
-			stmt = con.createStatement();
-			stmt.executeUpdate(sql);
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (con != null) con.close();
-			if (stmt != null) stmt.close(); 
-		}
-	}
-
-	public void bookmarkOff(String c_no) throws SQLException {
-		String sql = "Update bookmark SET bm = bm-1 WHERE c_no="+c_no;
-		try {
-			con = getConnection();
-			stmt = con.createStatement();
-			stmt.executeUpdate(sql);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
 			if (con != null) con.close();
-			if (stmt != null) stmt.close();
 		}
+		return list;
+	}
+
+	public int cookUpdate1(Cook cook) throws SQLException {
+		int result = 0;
+		String sql = "update cook set c_name=?, c_category=? where c_no=?";
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cook.getC_name());
+			pstmt.setString(2, cook.getC_category());
+			pstmt.setInt(3, cook.getC_no());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		}
+		return result;
+	}
+
+	public int cookUpdate2(Cook cook, List<String> fileList) throws Exception {
+		int result = 0;
+		String sql = "update cook set c_name=?, c_category=?, c_img=? where c_no=?";
+		String file = fileList.get(fileList.size() - 1);
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cook.getC_name());
+			pstmt.setString(2, cook.getC_category());
+			pstmt.setString(3, file);
+			pstmt.setInt(4, cook.getC_no());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		}
+		return result;
+	}
+
+	public int deleteItem(int c_no) throws Exception {
+		int result = 0;
+		String sql = "delete recipe where c_no=?";
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, c_no);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		}
+		return result;
+	}
+
+	public int insert3_5(List<String> list2, int c_no) throws Exception {
+		int result = 0;
+		String sql = "insert into recipe values (?,?)";
+		try {
+			con = getConnection();
+			for (int i = 0; i < list2.size(); i++) {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, c_no);
+				pstmt.setInt(2, Integer.parseInt(list2.get(i)));
+				result = pstmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (con != null) con.close();
+		}
+		return result;
 	}
 	
+	//member/MyListAction.java
+		public int WriteListCnt(int m_no) throws SQLException {
+			int tot = 0;
+			String sql = "select count(*) from cook where m_no = ?";
+			try {
+				con = getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, m_no);
+				rs = pstmt.executeQuery();
+				if(rs.next())	tot = rs.getInt(1);
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+			} finally {
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+				if (con != null) con.close();
+			}
+			return tot;
+		}
+
+		//member/MyListAction.java
+		public List<Cook> search(int startRow, int endRow, int m_no) {
+			List<Cook> list = new ArrayList<>();
+			String sql = "select * from" + 
+					" (select rownum rn, cook.* from" + 
+					" (select * from cook) cook)" + 
+					" where rn between ? and ? and m_no = ?";
+			try {
+				con = getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				pstmt.setInt(3, m_no);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Cook cook = new Cook();
+					cook.setC_no(rs.getInt(2));
+					cook.setM_no(rs.getInt(3));
+					cook.setC_name(rs.getString(4));
+					cook.setC_category(rs.getString(5));
+					cook.setC_img(rs.getString(6));
+					cook.setC_hits(rs.getString(7));
+					cook.setC_date(rs.getDate(8));
+					list.add(cook);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return list;
+		}
 }
+

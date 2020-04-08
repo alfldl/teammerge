@@ -16,13 +16,12 @@ public class UpdateProAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
 		try {
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			
 			String m_id = request.getParameter("m_id");
 			String m_pw = request.getParameter("m_pw");
-			//String m_pw_now = request.getParameter("m_pw_now");
 			String m_pw_new = request.getParameter("m_pw_new");
 			String m_name = request.getParameter("m_name");
 			String m_nickName = request.getParameter("m_nickName");
@@ -39,18 +38,13 @@ public class UpdateProAction implements CommandProcess {
 			
 			int result = md.update(member);
 			
-			if(result > 0) {
-				return "main/home.jsp";
-			} else {
-				out.println("<script>alert('정보가 일치하지 않습니다.'); location.href='member/updateForm.jsp';</script>");
-				return "member/updateForm.jsp";
-			}
+			request.setAttribute("result", result);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
-		return null;
+		return "member/updatePro.jsp";
 	}
 
 }

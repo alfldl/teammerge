@@ -1,6 +1,7 @@
 package service.member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -18,24 +19,25 @@ public class LoginProAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
-		
-		try {	
-			request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		try {
 			HttpSession session = request.getSession();
 			String m_id = request.getParameter("m_id");
 			String m_pw = request.getParameter("m_pw");
+			
 			MemberDao md = MemberDao.getInstance();
-			//int result = md.select(m_id, m_pw);
-			LoginUser user = md.Login(m_id, m_pw);
-			if (user.getResult() == 1) {
-				session.setAttribute("m_id", m_id);
+			LoginUser user = md.login(m_id, m_pw);
+			if(user.getResult() == 1) {
+				request.setAttribute("result", 1);
 				session.setAttribute("user", user);
-				return "index.jsp";
+			}else {
+				request.setAttribute("result", 0);
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "member/loginForm.jsp";
+		return "member/loginPro.jsp";
 	}
 
 }

@@ -16,35 +16,35 @@
 				<div id="cate_list">
 					<div class="cate_items">
 						<ul>
-							<a href="#"><label><li><img
+							<a href="store2.do?s_category=면류&pageNum=1"><label><li><img
 										src="img/store/noodle.png"></li>
 									<li>면류</li></label></a>
 						</ul>
 					</div>
 					<div class="cate_items">
 						<ul>
-							<a href="#"><label><li><img
+							<a href="store2.do?s_category=육류&pageNum=1"><label><li><img
 										src="img/store/meat.png"></li>
 									<li>육류</li></label></a>
 						</ul>
 					</div>
 					<div class="cate_items">
 						<ul>
-							<a href="#"><label><li><img
+							<a href="store2.do?s_category=해산물류&pageNum=1"><label><li><img
 										src="img/store/fish.png"></li>
 									<li>해산물류</li></label></a>
 						</ul>
 					</div>
 					<div class="cate_items">
 						<ul>
-							<a href="#"><label><li><img
+							<a href="store2.do?s_category=채소류&pageNum=1"><label><li><img
 										src="img/store/salad.png"></li>
 									<li>채소류</li></label></a>
 						</ul>
 					</div>
 					<div class="cate_items">
 						<ul>
-							<a href="#"><label><li><img
+							<a href="store2.do?s_category=기타&pageNum=1"><label><li><img
 										src="img/store/source.png"></li>
 									<li>기타</li></label></a>
 						</ul>
@@ -63,9 +63,11 @@
 											<li><input type="hidden" value="${list.s_no }"
 												name="s_no"></li> <input type="hidden"
 											value="${list.s_url }" name="s_url">
-											<li><img alt="java" src="${pageContext.request.contextPath }${list.s_img }"></li>
-											<li>${store.s_readcount }</li> 
-											<input type="submit" value="${list.s_title }">
+											<li><img alt="java"
+												src="${pageContext.request.contextPath }${list.s_img }"></li>
+											<%-- <a href = "${list.s_url }">${list.s_title }</a> --%>
+											<li>${store.s_readcount }</li> <input type="submit"
+											value="${list.s_title }">
 									</label></a>
 								</ul>
 							</form>
@@ -75,13 +77,13 @@
 			</div>
 			<div id="pageNum">
 				<c:if test="${startPage > blockSize }">
-					<a href='store.do?pageNum=${startPage-blockSize}'>[<<]</a>
+					<a href='store2.do?pageNum=${startPage-blockSize}'>[<<]</a>
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<a href='store.do?pageNum=${i}'>[${i }]</a>
+					<a href='store2.do?s_category=${s_category }&pageNum=${i}'>[${i }]</a>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-					<a href='store.do?pageNum=${startPage+blockSize }'>[>>]</a>
+					<a href='store2.do?pageNum=${startPage+blockSize }'>[>>]</a>
 				</c:if>
 			</div>
 		</div>

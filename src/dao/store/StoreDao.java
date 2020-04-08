@@ -92,6 +92,30 @@ public class StoreDao {
 		}
 		return tot;
 	}
+	
+	
+	public int getTotalCnt2(String s_category) throws Exception {
+		int tot = 0;
+		String sql = "select count(*) from store where s_category=?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, s_category);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				tot = rs.getInt(1);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (stmt != null)
+				stmt.close();
+			if (conn != null)
+				conn.close();
+		}
+		return tot;
+	}
 	public void s_readcount(String s_no) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -203,8 +227,38 @@ public class StoreDao {
 			con.close();
 		}
 	
-
-		
 		return slist;
+	}
+	
+	public List<Store> select2(int startRow, int endRow, String s_category) {
+		List<Store> list = new ArrayList<Store>();
+		String sql = "select * from (select row_number() over (order by s_no desc) rn, store.* "
+									+ "from store "
+									+ "where s_category = ? "
+									+ "order by rn) "
+					+ "where rn between ? and ?";
+		Store store = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, s_category);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				store = new Store();
+				store.setS_no(rs.getInt("s_no"));
+				store.setS_title(rs.getString("s_title"));
+				store.setS_img(rs.getString("s_img"));
+				store.setS_url(rs.getString("s_url"));
+				store.setS_readcount(rs.getInt("s_readcount"));
+				store.setS_category(rs.getString("s_category"));
+				list.add(store);
+
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
 	}
 }

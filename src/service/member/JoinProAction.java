@@ -16,9 +16,9 @@ public class JoinProAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("joinProAction 시작");
 		try {
 			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");
 			PrintWriter out = response.getWriter();
 
 			String m_id = request.getParameter("m_id");
@@ -39,7 +39,8 @@ public class JoinProAction implements CommandProcess {
 			int result = md.insert(member);
 			
 			if(result > 0) {
-				return "member/loginForm.jsp";
+				out.println("<script>alert('success-! sign up');location.href='member/loginForm.jsp';</script>");
+				//return "member/loginForm.jsp";
 			} else {
 				return "member/joinForm.jsp";
 			}

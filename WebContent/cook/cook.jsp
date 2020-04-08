@@ -7,9 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/recipe.css">
-<script>
-	
-</script>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -68,11 +65,7 @@
 											src="${pageContext.request.contextPath }${cook.c_img }"></li>
 										<li><b>${cook.c_name }</b></li></label></a>
 								<li>by.${cook.m_nickname }</li>
-								<li>조회수 : ${cook.c_hits }</li>
-								<form action = "bookMark.do" name = "${cook.c_no }" onclick = "${cook.c_no }">
-									<input type = "hidden" value = "${cook.c_no }" name = "c_no">
-									<input type = "submit" value = "북마크">
-								</form>
+								<li id="vc">조회수 : ${cook.c_hits }</li>
 							</ul>
 						</div>
 						<c:set var="startNum" value="${startNum -1 }" />
@@ -84,6 +77,18 @@
 					<a href='cook.do?pageNum=${startPage-blockSize}'>[<<]</a>
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<%-- <c:choose>
+						<c:when test="${i eq currentPage }">
+							<style>
+								a:link {
+									color: blue;
+								}
+								a:visited {
+									color: blue;
+								}
+							</style>
+						</c:when>
+					</c:choose> --%>
 					<a href='cook.do?pageNum=${i}'>[${i }]</a>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
@@ -91,11 +96,11 @@
 				</c:if>
 				<div id="writer">
 					<center>
-						<c:if test="${m_id eq null }">
+						<c:if test="${user eq null }">
 							<input type="button" value="글쓰기" onclick="location.href='login.do'">
 							
 						</c:if>
-						<c:if test="${m_id ne null }">
+						<c:if test="${user ne null }">
 							<input type="button" value="글쓰기" onclick="location.href='cookWriter.do?pageNum=${pageNum }'">
 						</c:if>
 					</center>

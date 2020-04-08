@@ -78,12 +78,12 @@ section .items li {
 }
 #topnav{
 overflow: hidden;
-background-color: #333;
+background-color:#1C1C1C;
 position:fixed;
 top:0;
 left:0;
 right:0;
-z-index: -1;
+
 
 
 }
@@ -119,9 +119,6 @@ padding-top:60px;
 	height: 50px;
 	position:fixed;
 }
-
-
-
 .button{
 position:relative;
 border: none;
@@ -131,6 +128,7 @@ width:50px;
 height:50px;
 bottom:8px;	
 left:4px;
+z-index: 1;
 }
 .button img{
 	position:relative;
@@ -176,8 +174,5 @@ background-color: #ddd;
 	padding: 6px;
 	margin-top: 8px;
 	font-size: 17px;
-	border: none;
-	width:120px;
-	background-color: #ddd;
-	border-radius: 3px;
+	color: white;
 }

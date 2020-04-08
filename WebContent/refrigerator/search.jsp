@@ -15,6 +15,7 @@
 </head>
 <body>
 <%@ include file="../header.jsp"%>
+	<div class = "gong"></div>
 	<div class="grid_con">
 		<div class="con1">
 			<div id="cate_list">
@@ -57,7 +58,7 @@
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					
-					<a href='searchList.do?pageNum=${i }&i_itemStr=${i_itemStr}'>[${i }] ${i_itemStr}</a>
+					<a href='searchList.do?pageNum=${i }&i_itemStr=${i_itemStr}'>[${i }]</a>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
 					<a href='searchList.do?pageNum=${startPage+blockSize }&i_itemStr=${i_itemStr}'>[>>]</a>

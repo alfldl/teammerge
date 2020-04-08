@@ -57,7 +57,7 @@
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					
-					<a href='searchList.do?pageNum=${i }&i_itemStr=${i_itemStr}'>[${i }] ${i_itemStr}</a>
+					<a href='searchList.do?pageNum=${i }&i_itemStr=${i_itemStr}'>[${i }]</a>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
 					<a href='searchList.do?pageNum=${startPage+blockSize }&i_itemStr=${i_itemStr}'>[>>]</a>

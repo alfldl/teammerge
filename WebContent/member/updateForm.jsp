@@ -29,7 +29,7 @@
 			<table border="1">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="m_id" value="${info.m_id }"></td>
+					<td><input type="text" name="m_id" value="${user.m_id }"></td>
 				</tr>
 				<tr>
 					<td>현재 암호</td>
@@ -46,20 +46,21 @@
 				<tr>
 					<td>닉네임</td>
 					<td><input type="text" name="m_nickName" required="required"
-						value="${info.m_nickname }"></td>
+						value="${user.m_nickname }"></td>
 				<tr>
 					<td>이름</td>
 					<td><input type="text" name="m_name" required="required"
-						value="${info.m_name }"></td>
+						value="${user.m_name }"></td>
 				</tr>
 				<tr>
 					<td>연락처</td>
 					<td><input type="tel" name="m_phone" required="required"
-						value="${info.m_phone }"></td>
+						value="${user.m_phone }"></td>
 				</tr>
 			</table>
-			<br> <input type="submit" value="확인"> <input
-				type="reset" value="취소">
+			<br> 
+			<input type="submit" value="확인"> 
+			<input type="reset" value="취소">
 		</form>
 	</div>
 </body>

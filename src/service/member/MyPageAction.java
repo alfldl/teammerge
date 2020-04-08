@@ -23,18 +23,6 @@ public class MyPageAction implements CommandProcess {
 		try {
 			HttpSession session = request.getSession();
 			LoginUser user = (LoginUser) session.getAttribute("user");
-			
-			MemberDao md = MemberDao.getInstance();
-			Member member = new Member();
-			CookDao cd = CookDao.getInstance();
-			Cook cook = new Cook();
-			List<LoginUser> bookList = md.book(user.getM_no());
-			List<LoginUser> writeList = md.write(user.getM_no());
-			
-			request.setAttribute("bmList", bookList);
-			request.setAttribute("wList", writeList);
-			
-			
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

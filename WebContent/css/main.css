@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 #writer {
 	position: relative;
 	left: 510px;
@@ -7,42 +8,68 @@
 }
 .gong {
 	width: 100%;
-	height: 70px;
+	height: 50px;
 	
 }
 .grid_con {
 	display: grid;
-	grid-template-rows: 250px 250px 250px;
+	grid-template-rows: 20px 250px 20px 250px 20px 250px 250px;
 	max-height: 1400px;
 	grid-template-columns: auto;
 	max-width: 1200px;
-	grid-gap: 30px;
-	border: solid #ddd 1px;
-	padding: 20px;
+	grid-gap: 20px;
+	border: solid white 1px;
 	margin: auto;
 	align-content: center;
-	padding: 20px;
+	
 }
 
 .grid_con>div {
 	background-color: #ddd;
 	text-align: center;
-	padding-top: 20px;
 	font-size: 18px;
 }
 
 .con1 {
 	grid-row: 1/2;
 	grid-column: 1/2;
+	border-radius: 5px;
 }
 
 .con2 {
+	
 	grid-row: 2/3;
 	grid-column: 1/2;
+	margin-top:20px;
 }
 .con3 {
 	grid-row: 3/4;
 	grid-column: 1/2;
+	border-radius: 5px;
+	height:0px;
+	
+}
+.con4 {
+	grid-row: 4/5;
+	grid-column: 1/2;
+		margin-top:10px;
+		
+}
+.con5 {
+	grid-row: 5/6;
+	grid-column: 1/2;
+	height:0px;
+}
+.con6 {
+	grid-row: 6/7;
+	grid-column: 1/2;
+	margin-top:10px;
+	padding: 20px;
+}
+.con7 {
+	grid-row: 7/8;
+	grid-column: 1/2;
+	margin-top:10px;
 }
 
 
@@ -190,41 +217,49 @@ padding-top:60px;
 	height: 50px;
 	position:fixed;
 }
-p1{font-family: 'Jua', sans-serif;
- font-size: 30px;
-color:black;
-border-style:inset;
-width:10%;	
-border-color:#FF5675;
+p1{font-family: 'Cute Font', cursive;
+font-family: 'Do Hyeon', sans-serif;
+ font-size: 40px;
+color:#ffffff;
+  border-bottom: 1px solid #ddd;
+text-shadow: 2px 2px 6px red;
+z-index: 1;
+	
+
+
 }
-p2{font-family: 'Jua', sans-serif;
- font-size: 30px;
-color:black;
-border-style:inset;
-width:10%;	
-border-color:#FFB400;
-}
-p3{font-family: 'Jua', sans-serif;
- font-size: 30px;
-color:black;
-border-style:inset;
-width:10%;	
+p2{font-family: 'Cute Font', cursive;
+font-family: 'Do Hyeon', sans-serif;
+ font-size: 40px;
+color:#ffffff;
 border-color:#8C8CF5;
+padding:10px 10px 5px 5px;
+	text-shadow: 2px 2px 6px #8904B1;
+	position: relative;
+	left:450px;	
 }
-textarea.a {
-width:600px;
+p3{font-family: 'Cute Font', cursive;
+font-family: 'Do Hyeon', sans-serif;
+ font-size: 40px;
+color:#ffffff;
+border-color:#8C8CF5;
+padding:10px 10px 5px 5px;
+	text-shadow: 2px 2px 6px #013ADF;
+}
+input.a {
+width:550px;
  height:150px;
  float:right;
  position: relative;
-right:100px;
-bottom:10px; 
+right:200px;
+top:5px;
 
 }
 input.b {
 float:right;
 position: relative;
-left:600px;
-right:130px;
+right:-440px;
+bottom:30px;
 top:130px;
 cursor: pointer; 
 border-radius: 4px;
@@ -243,4 +278,15 @@ border: none;
 border-radius: 5px;
 background-color:#ddd;
 
+}
+.footer{
+	position: relative;
+	top:30px;
+	left:100px;
+	
+}
+
+#1 img{
+	width:190px;
+	height: 132px;	
 }

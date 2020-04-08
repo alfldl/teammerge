@@ -15,18 +15,22 @@ public class DeleteProAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("m_id");
-		request.setAttribute("m_id", m_id);
-		
-		String m_pw = request.getParameter("m_pw");
-		
-		MemberDao md = MemberDao.getInstance();
-		int result = md.delete(m_id, m_pw);
-		if(result == 1) {
-			session.invalidate();
-			return "main/home.jsp";
-		} 
+		try {
+			HttpSession session = request.getSession();
+			String m_id = (String) session.getAttribute("m_id");
+			request.setAttribute("m_id", m_id);
+			
+			String m_pw = request.getParameter("m_pw");
+			
+			MemberDao md = MemberDao.getInstance();
+			int result = md.delete(m_id, m_pw);
+			if(result == 1) {
+				session.invalidate();
+				return "main/home.jsp";
+			} 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return "member/delete.jsp";
 	}
 

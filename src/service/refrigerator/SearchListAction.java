@@ -101,7 +101,7 @@ public class SearchListAction implements CommandProcess {
 				e.printStackTrace();
 			}
 			
-			return "refrigerator/searchList3.jsp";
+			return "refrigerator/searchList.jsp";
 	}
 
 }

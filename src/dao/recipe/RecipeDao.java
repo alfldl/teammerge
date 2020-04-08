@@ -52,7 +52,7 @@ public class RecipeDao {
 			}
 		}
 		String sql = "select distinct c_no from" + " (select c.c_no, c.c_name, c.c_category, "
-				+ " c.c_img, c.c_hits, c.c_po, c.c_date," + " i.i_no, i.i_catego, i.i_item, i.i_img" + " from cook c"
+				+ " c.c_img, c.c_hits, c.c_date," + " i.i_no, i.i_catego, i.i_item, i.i_img" + " from cook c"
 				+ " left join recipe r on r.c_no = c.c_no" + " left join ingredient i on i.i_no = r.i_no"
 				+ " where i.i_item in (" + item + "))";
 		try {
@@ -77,14 +77,11 @@ public class RecipeDao {
 
 		String item = "";
 		for (int i = 0; i < rList.size(); i++) {
-			// System.out.println("recipedao rLsit->"+rList.get(i).getC_no());
 			item += "'" + rList.get(i).getC_no() + "'";
 			if (i < rList.size() - 1) {
 				item += ",";
 			}
 		}
-		System.out.println("recipedao item-> " + item);
-
 		String sql = "select * from (select row_number() " + " over (order by c_no desc) rn, cook.*, member.m_nickname "
 				+ " from cook join member " + " on cook.m_no = member.m_no" + " where cook.c_no in (" + item + ") "
 				+ " order by rn) " + " where rn between ? and ?";
@@ -104,9 +101,9 @@ public class RecipeDao {
 				cook.setC_category(rs.getString(5));
 				cook.setC_img(rs.getString(6));
 				cook.setC_hits(rs.getString(7));
-				cook.setC_po(rs.getString(8));
-				cook.setC_date(rs.getDate(9));
-				cook.setM_nickname(rs.getString(10));
+				//cook.setC_po(rs.getString(8));
+				cook.setC_date(rs.getDate(8));
+				cook.setM_nickname(rs.getString(9));
 				sList.add(cook);
 			}
 		} catch (Exception e) {

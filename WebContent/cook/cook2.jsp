@@ -65,7 +65,7 @@
 											src="${pageContext.request.contextPath }${cook.c_img }"></li>
 										<li><b>${cook.c_name }</b></li></label></a>
 								<li>by.${cook.m_nickname }</li>
-								<li>조회수 : ${cook.c_hits }</li>
+								<li id="vc">조회수 : ${cook.c_hits }</li>
 							</ul>
 						</div>
 						<c:set var="startNum" value="${startNum -1 }" />
@@ -84,21 +84,21 @@
 					<a
 						href='cook2.do?category=${c_category }&pageNum=${startPage+blockSize }'>[>>]</a>
 				</c:if>
+				<div id="writer">
+					<center>
+						<c:if test="${m_id eq null }">
+							<input type="button" value="글쓰기"
+								onclick="location.href='login.do'">
+
+						</c:if>
+						<c:if test="${m_id ne null }">
+							<input type="button" value="글쓰기"
+								onclick="location.href='cookWriter.do?pageNum=${pageNum }'">
+						</c:if>
+					</center>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div>
-		<center>
-			<c:if test="${m_id eq null }">
-				<script>
-					alert('로그인 먼저해!!!!')	
-				</script>
-				<input type="button" value="글쓰기" onclick="location.href='login.do'">
-			</c:if>
-			<c:if test="${m_id ne null }">
-				<input type="button" value="글쓰기" onclick="location.href='cookWriter.do?pageNum=${pageNum }'">
-			</c:if>
-		</center>
 	</div>
 	<%@ include file="../footer.jsp"%>
 </body>

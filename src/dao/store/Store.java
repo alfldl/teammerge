@@ -6,6 +6,15 @@ public class Store {
 	private String s_img;
 	private String s_url;
 	private int s_readcount;
+	private String s_category;
+
+	public String getS_category() {
+		return s_category;
+	}
+
+	public void setS_category(String s_category) {
+		this.s_category = s_category;
+	}
 
 	public int getS_no() {
 		return s_no;

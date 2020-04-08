@@ -11,8 +11,8 @@
 
 <link rel="stylesheet" type="text/css" href="css/header.css">
 <link rel="stylesheet" type="text/css" href="css/footer.css">
-<link href="https://fonts.googleapis.com/css?family=Single+Day&display=swap&subset=korean"
-	  rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Single+Day&display=swap&subset=korean" rel="stylesheet">
+	  
 </head>
 
 <body>
@@ -30,19 +30,11 @@
 					</button>
 					<div class="dropdown-content" >
 					<ul class="nav">
-						<a href="myPage.do">마이페이지</a>
-						<a href="#">스크랩한 레시피</a>
-						<a href="#">레시피 노트</a>
-						<a href="#">알림</a>
-						<a href="#">메시지</a>
-						<a href="#">문의내역</a>
-						<a href="#">주문조회</a>
-						<a href="#">장바구니</a>
-						<c:if test="${m_id eq null }">
+						<c:if test="${user eq null }">
 							<a href="login.do">로그인</a>
 						</c:if>
-						<c:if test="${m_id ne null }">
-							<a href="update.do">회원정보수정</a>
+						<c:if test="${user ne null }">
+							<a href="myPage.do">마이페이지</a>
 							<a href="logOut.do">로그아웃</a>
 							<a href="delete.do">회원탈퇴</a>
 						</c:if>
@@ -58,8 +50,8 @@
 				<div class="login-container">
 					<c:if test="${user eq null }">
 						<form action="loginPro.do" method = "post">
-							<input type="text" placeholder="아이디" name="m_id">
-							<input type="password" placeholder="비밀번호" name="m_pw">
+							<input type="text" placeholder="아이디" name="m_id" required = "required">
+							<input type="password" placeholder="비밀번호" name="m_pw" required = "required">
 							<input type="submit" value="로그인">
 							<!-- <button type="submit">Login</button> -->
 						</form>

@@ -13,7 +13,12 @@ public class LoginAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		try {
+			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("utf-8");
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return "member/loginForm.jsp";
 	}
 

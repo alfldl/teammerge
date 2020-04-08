@@ -16,21 +16,27 @@ public class RefrigeratorAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, Exception{
+		try {
+			IngredientDao idao = IngredientDao.getInstance();
 
-		IngredientDao idao = IngredientDao.getInstance();
+			List<Ingredient> listNoodle = idao.listN();
+			request.setAttribute("listNoodle", listNoodle);
 
-		List<Ingredient> listNoodle = idao.listN();
-		request.setAttribute("listNoodle", listNoodle);
+			List<Ingredient> listMeat = idao.listM();
+			request.setAttribute("listMeat", listMeat);
 
-		List<Ingredient> listMeat = idao.listM();
-		request.setAttribute("listMeat", listMeat);
+			List<Ingredient> listSeafood = idao.listS();
+			request.setAttribute("listSeafood", listSeafood);
 
-		List<Ingredient> listSeafood = idao.listS();
-		request.setAttribute("listSeafood", listSeafood);
-
-		List<Ingredient> listVegitable = idao.listV();
-		request.setAttribute("listVegitable", listVegitable);
-
+			List<Ingredient> listVegitable = idao.listV();
+			request.setAttribute("listVegitable", listVegitable);
+			
+			List<Ingredient> listCondiment = idao.listC();
+			request.setAttribute("listCondiment", listCondiment);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return "refrigerator/refrigerator.jsp";
 	}
 
